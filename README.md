@@ -1,4 +1,4 @@
-# REST API in pure Java for managing programming snippets
+# JAVA REST API for managing programming snippets
 
 ## Concept 
 
