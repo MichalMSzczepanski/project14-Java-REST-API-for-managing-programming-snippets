@@ -4,7 +4,7 @@
 
 It would be nice to have one source of snippets instead of 25 bookmarks, 5 spreadsheets and a few apps for managing similliar topics. so here's an API to gather snippets from around the world.
 
-Api key set at 123456789.
+Api key "authentication" : 123456789
 
 ## Technical aspects
 
