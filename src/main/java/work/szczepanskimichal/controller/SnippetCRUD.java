@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @WebServlet(name = "SnippetCRUD", value = "/snippetAPI")
 public class SnippetCRUD extends HttpServlet {
-    
+
     // json converter object has methods to parse json objects and objects
     JsonConverter jsonConverter = new JsonConverter();
     // for now initialize snippetList with two snippets (later communicate with DAO classes and DB)
@@ -29,6 +29,7 @@ public class SnippetCRUD extends HttpServlet {
     // get all snippets or snippet by id
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         if (request.getHeader("authentication").equals(apiKey)) {
             if (request.getParameter("id") != null) {
                 // if parameter present - return specific snippet
@@ -51,6 +52,7 @@ public class SnippetCRUD extends HttpServlet {
     // post snippet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         if (request.getHeader("authentication").equals(apiKey)) {
             // tbc details why and how this works --->
             String newSnippetJsonString = request.getReader().lines().collect(Collectors.joining());
@@ -74,13 +76,12 @@ public class SnippetCRUD extends HttpServlet {
 
     // delete snippet by id
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         if (request.getHeader("authentication").equals(apiKey)) {
             snippetList.deleteSnippet(Integer.parseInt(request.getParameter("id")));
         } else {
             response.getWriter().append("no api key found or api key doesn't exist");
         }
     }
-
-
 
 }
