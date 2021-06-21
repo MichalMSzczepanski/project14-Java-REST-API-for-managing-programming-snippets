@@ -8,10 +8,7 @@ Api key set at 123456789.
 
 ## Technical aspects
 
-- Java 8
--- javax.servlet-api
--- jackson-databind
--- mysql-connector-java
+- Java 8 (javax.servlet-api; jackson-databind; mysql-connector-java)
 - MySQL
 
 No framework used in the name of practice.
