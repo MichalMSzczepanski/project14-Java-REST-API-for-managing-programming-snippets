@@ -6,6 +6,10 @@ public class Author {
     private String email;
     private Boolean isAdmin;
 
+    public Author() {
+
+    }
+
     public Author(Integer id, String name, String email, Boolean isAdmin) {
         this.id = id;
         this.name = name;

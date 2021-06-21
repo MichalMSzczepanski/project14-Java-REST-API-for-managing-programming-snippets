@@ -1,6 +1,8 @@
 package work.szczepanskimichal.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Snippet {
 
@@ -10,33 +12,27 @@ public class Snippet {
     private String programmingLanguage;
     private String title;
     private String snippet;
-    private LocalDateTime created;
-    private LocalDateTime edited;
 
     public Snippet() {
     }
 
     // constructor for data base
-    public Snippet(String visibility, Author author, String programmingLanguage, String title, String snippet, LocalDateTime created, LocalDateTime edited) {
+    public Snippet(String visibility, Author author, String programmingLanguage, String title, String snippet) {
         this.visibility = visibility;
         this.author = author;
         this.programmingLanguage = programmingLanguage;
         this.title = title;
         this.snippet = snippet;
-        this.created = created;
-        this.edited = edited;
     }
 
     // constructor for tests
-    public Snippet(Integer id, String visibility, Author author, String programmingLanguage, String title, String snippet, LocalDateTime created, LocalDateTime edited) {
+    public Snippet(Integer id, String visibility, Author author, String programmingLanguage, String title, String snippet) {
         this.id = id;
         this.visibility = visibility;
         this.author = author;
         this.programmingLanguage = programmingLanguage;
         this.title = title;
         this.snippet = snippet;
-        this.created = created;
-        this.edited = edited;
     }
 
     public Integer getId() {
@@ -87,21 +83,7 @@ public class Snippet {
         this.snippet = snippet;
     }
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
 
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
-    public LocalDateTime getEdited() {
-        return edited;
-    }
-
-    public void setEdited(LocalDateTime edited) {
-        this.edited = edited;
-    }
 
     @Override
     public String toString() {
@@ -112,8 +94,6 @@ public class Snippet {
                 ", programmingLanguage='" + programmingLanguage + '\'' +
                 ", title='" + title + '\'' +
                 ", snippet='" + snippet + '\'' +
-                ", created=" + created +
-                ", edited=" + edited +
                 '}';
     }
 }
