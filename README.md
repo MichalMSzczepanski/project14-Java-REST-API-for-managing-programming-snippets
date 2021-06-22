@@ -48,8 +48,9 @@ returns JSON string with specific snippet
 
 Add snippet to DB @ "/snippetAPI"
 requires: API key in HTTP header; JSON file in request body
-JSON file fields requered for creating snippet: {"visibility":"normal/ private","author":{"name":"name","email":"email@email.com","handle":"handle","apiKey":"apiKey"},"programmingLanguage":"language","title":"snippet title","snippet":"snippet conntents"}
-> returns: nothing
+JSON file fields requered for creating snippet:
+{"visibility":"normal/ private","author":{"name":"name","email":"email@email.com","handle":"handle","apiKey":"apiKey"},"programmingLanguage":"language","title":"snippet title","snippet":"snippet conntents"}
+returns: nothing
 
 
 /**PUT**
