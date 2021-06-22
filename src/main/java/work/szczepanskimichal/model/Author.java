@@ -4,16 +4,27 @@ public class Author {
     private Integer id;
     private String name;
     private String email;
+    private String handle;
+    private String apiKey;
     private Boolean isAdmin;
 
     public Author() {
 
     }
 
-    public Author(Integer id, String name, String email, Boolean isAdmin) {
+    public Author(String name, String email, String handle, String apiKey) {
+        this.name = name;
+        this.email = email;
+        this.handle = handle;
+        this.apiKey = apiKey;
+    }
+
+    public Author(Integer id, String name, String email, String handle, String apiKey, Boolean isAdmin) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.handle = handle;
+        this.apiKey = apiKey;
         this.isAdmin = isAdmin;
     }
 
@@ -41,20 +52,38 @@ public class Author {
         this.email = email;
     }
 
-    public Boolean getAdmin() {
+    public String getHandle() {
+        return handle;
+    }
+
+    public void setHandle(String handle) {
+        this.handle = handle;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public Boolean getIsAdmin() {
         return isAdmin;
     }
 
-    public void setAdmin(Boolean admin) {
+    public void setIsAdmin(Boolean admin) {
         isAdmin = admin;
     }
 
     @Override
     public String toString() {
         return "Author{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", handle='" + handle + '\'' +
+                ", apiKey='" + apiKey + '\'' +
                 ", isAdmin=" + isAdmin +
                 '}';
     }

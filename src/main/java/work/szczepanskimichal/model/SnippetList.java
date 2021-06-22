@@ -19,11 +19,11 @@ public class SnippetList {
 
     private List<Snippet> snippetList;
 
-    public SnippetList() {
-        this.snippetList = new ArrayList<>();
-        snippetList.add(new Snippet(1, "private", new Author(1, "name1", "email1@email.com", false), "java", "java spring - first snippet", "first snippet contents"));
-        snippetList.add(new Snippet(2, "private", new Author(1, "name2", "email2@email.com", true), "java script", "java script - second snippet", "second snippet contents"));
-    }
+//    public SnippetList() {
+//        this.snippetList = new ArrayList<>();
+//        snippetList.add(new Snippet(1, "private", new Author(1, "name1", "email1@email.com", "handle1", "123" , false), "java", "java spring - first snippet", "first snippet contents"));
+//        snippetList.add(new Snippet(2, "private", new Author(1, "name2", "email2@email.com", "handle2", "345" , true), "java script", "java script - second snippet", "second snippet contents"));
+//    }
 
     public List<Snippet> getSnippetList() {
         return snippetList;
@@ -33,6 +33,7 @@ public class SnippetList {
         this.snippetList = snippetList;
     }
 
+    // CRUD methods
     public Snippet getSnippetById(Integer id) {
         return snippetList.get(id - 1);
     }
@@ -41,11 +42,10 @@ public class SnippetList {
         snippetList.add(snippet);
     }
 
-    public List<Snippet> deleteSnippet (int id) {
+    public void deleteSnippet (int id) {
         snippetList = snippetList.stream()
                 .filter(s -> s.getId() != id)
                 .collect(Collectors.toList());
-        return snippetList;
     }
 
     public void updateSnippetById (int id, Snippet snippet) {

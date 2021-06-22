@@ -26,14 +26,14 @@ public class Snippet {
     }
 
     // constructor for tests
-    public Snippet(Integer id, String visibility, Author author, String programmingLanguage, String title, String snippet) {
-        this.id = id;
-        this.visibility = visibility;
-        this.author = author;
-        this.programmingLanguage = programmingLanguage;
-        this.title = title;
-        this.snippet = snippet;
-    }
+//    public Snippet(Integer id, String visibility, Author author, String programmingLanguage, String title, String snippet) {
+//        this.id = id;
+//        this.visibility = visibility;
+//        this.author = author;
+//        this.programmingLanguage = programmingLanguage;
+//        this.title = title;
+//        this.snippet = snippet;
+//    }
 
     public Integer getId() {
         return id;

@@ -1,23 +1,19 @@
 package work.szczepanskimichal.controller;
 
-import work.szczepanskimichal.jsonConverter.JsonConverter;
-import work.szczepanskimichal.model.Snippet;
+import work.szczepanskimichal.Util.JsonConverter;
 import work.szczepanskimichal.model.SnippetList;
+import work.szczepanskimichal.model.SnippetListDAO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "SnippetCRUD", value = "/snippetAPI")
-public class SnippetCRUD extends HttpServlet {
+public class SnippetController extends HttpServlet {
 
     // json converter object has methods to parse json objects and objects
     JsonConverter jsonConverter = new JsonConverter();
@@ -54,10 +50,18 @@ public class SnippetCRUD extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if (request.getHeader("authentication").equals(apiKey)) {
+            String apiKey = request.getHeader("authentication");
             // tbc details why and how this works --->
             String newSnippetJsonString = request.getReader().lines().collect(Collectors.joining());
             // <---
-            snippetList.addSnippet(jsonConverter.convertJsonToSnippet(newSnippetJsonString));
+            try {
+                SnippetListDAO.addSnippet(jsonConverter.convertJsonToSnippet(newSnippetJsonString), apiKey);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                System.out.println("issue with sql connection");
+            }
+            // manual adding to list
+//            snippetList.addSnippet(jsonConverter.convertJsonToSnippet(newSnippetJsonString));
         } else {
             response.getWriter().append("no api key found or api key doesn't exist");
         }
