@@ -17,20 +17,12 @@ import java.util.stream.Collectors;
 @WebServlet(name = "SnippetCRUD", value = "/snippetAPI")
 public class SnippetController extends HttpServlet {
 
-    // json converter object has methods to parse json objects and objects
-    JsonConverter jsonConverter = new JsonConverter();
-    // for now initialize snippetList with two snippets (later communicate with DAO classes and DB)
-    SnippetList snippetList = new SnippetList();
-    // static final api key for the time being
-    static final String apiKey = "123456789";
-
     // get all snippets or snippet by id
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String apiKey = request.getHeader("authentication");
         try {
-            if (SnippetListDAO.validateApiKeyExistence(request.getHeader("authentication"))) {
-                String apiKey = request.getHeader("authentication");
+            if (SnippetListDAO.validateApiKeyExistence(apiKey)) {
                 if (request.getParameter("id") != null) {
                     // if parameter "id" present - return specific snippet by id
                     int snippetId = Integer.valueOf(request.getParameter("id"));
@@ -57,7 +49,7 @@ public class SnippetController extends HttpServlet {
                 // tbc details why and how this works --->
                 String newSnippetJsonString = request.getReader().lines().collect(Collectors.joining());
                 // <---
-                SnippetListDAO.addSnippet(jsonConverter.convertJsonToSnippet(newSnippetJsonString), request.getHeader("authentication"));
+                SnippetListDAO.addSnippet(JsonConverter.convertJsonToSnippet(newSnippetJsonString), request.getHeader("authentication"));
             } else {
                 response.getWriter().append("no api key found or api key doesn't exist");
             }
@@ -69,22 +61,30 @@ public class SnippetController extends HttpServlet {
 
     // update snippet by id
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        if (request.getHeader("authentication").equals(apiKey)) {
-            String updatedSnippetJsonString = request.getReader().lines().collect(Collectors.joining());
-            snippetList.updateSnippetById(Integer.parseInt(request.getParameter("id")), jsonConverter.convertJsonToSnippet(updatedSnippetJsonString));
-        } else {
-            response.getWriter().append("no api key found or api key doesn't exist");
+        String apiKey = request.getHeader("authentication");
+        try {
+            if (SnippetListDAO.validateApiKeyExistence(apiKey)) {
+                String updatedSnippetJsonString = request.getReader().lines().collect(Collectors.joining());
+                SnippetListDAO.updateSnippetBySnippetId(apiKey, Integer.valueOf(request.getParameter("id")), JsonConverter.convertJsonToSnippet(updatedSnippetJsonString));
+            } else {
+                response.getWriter().append("no api key found or api key doesn't exist");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 
     // delete snippet by id
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        if (request.getHeader("authentication").equals(apiKey)) {
-            snippetList.deleteSnippet(Integer.parseInt(request.getParameter("id")));
-        } else {
-            response.getWriter().append("no api key found or api key doesn't exist");
+        String apiKey = request.getHeader("authentication");
+        try {
+            if (SnippetListDAO.validateApiKeyExistence(apiKey)) {
+                SnippetListDAO.deleteSnippetBySnippetId(apiKey, Integer.valueOf(request.getParameter("id")));;
+            } else {
+                response.getWriter().append("no api key found or api key doesn't exist");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Year;
 
-public class JsonConverter <O> {
+public class JsonConverter {
 
     private static ObjectMapper mapper = new ObjectMapper();
 

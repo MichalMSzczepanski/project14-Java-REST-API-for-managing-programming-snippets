@@ -37,7 +37,7 @@ public class SnippetListDAO {
         PreparedStatement ps = connection.prepareStatement(validateApiKeyExistence);
         ps.setString(1, apiKey);
         ResultSet rs = ps.executeQuery();
-        while(rs.next()) {
+        while (rs.next()) {
             apiKeyExists = true;
         }
         return apiKeyExists;
@@ -92,21 +92,9 @@ public class SnippetListDAO {
 
     // get all snippets of author based on api key
     public static List<String> getAllSnippetsOfAuthor(String apiKeyAuth) throws SQLException {
-        Integer authorId = null;
-        PreparedStatement ps1 = connection.prepareStatement(readAuthor);
-        ps1.setString(1, apiKeyAuth);
-        ResultSet rs1 = ps1.executeQuery();
-        Author author = new Author();
-        while (rs1.next()) {
-            author.setId(rs1.getInt(1));
-            author.setName(rs1.getString(2));
-            author.setEmail(rs1.getString(3));
-            author.setHandle(rs1.getString(4));
-            author.setApiKey(rs1.getString(5));
-            authorId = rs1.getInt(1);
-        }
-        System.out.println("flag author");
-        System.out.println(author);
+
+        Author author = fetchAuthorByApiKey(apiKeyAuth);
+        Integer authorId = author.getId();
 
         List<String> list = new ArrayList<>();
         PreparedStatement ps2 = connection.prepareStatement(readAllSnippetsOfAuthor);
@@ -132,23 +120,11 @@ public class SnippetListDAO {
         return list;
     }
 
-    // get one snippet based on snippet id
+    // get one snippet based on snippet id afer validating author api key
     public static String getSnippetBySnippetId(String apiKeyAuth, int snippetId) throws SQLException {
-        Integer authorId = null;
-        PreparedStatement ps1 = connection.prepareStatement(readAuthor);
-        ps1.setString(1, apiKeyAuth);
-        ResultSet rs1 = ps1.executeQuery();
-        Author author = new Author();
-        while (rs1.next()) {
-            author.setId(rs1.getInt(1));
-            author.setName(rs1.getString(2));
-            author.setEmail(rs1.getString(3));
-            author.setHandle(rs1.getString(4));
-            author.setApiKey(rs1.getString(5));
-            authorId = rs1.getInt(1);
-        }
-        System.out.println("flag author");
-        System.out.println(author);
+
+        Author author = fetchAuthorByApiKey(apiKeyAuth);
+        Integer authorId = author.getId();
 
         PreparedStatement ps2 = connection.prepareStatement(readSnippet);
         ps2.setInt(1, snippetId);
@@ -164,6 +140,58 @@ public class SnippetListDAO {
             snippet.setSnippet(rs2.getString(6));
         }
         return JsonConverter.convertObjectToJson(snippet);
+    }
+
+    public static Boolean updateSnippetBySnippetId(String apiKeyAuth, int snippetId, Snippet snippet) throws SQLException {
+
+        Author author = fetchAuthorByApiKey(apiKeyAuth);
+        Integer authorId = author.getId();
+
+        PreparedStatement ps = connection.prepareStatement(updateSnippet);
+        ps.setString(1, snippet.getVisibility());
+        ps.setInt(2, authorId);
+        ps.setString(3, snippet.getProgrammingLanguage());
+        ps.setString(4, snippet.getTitle());
+        ps.setString(5, snippet.getSnippet());
+        ps.setInt(6, snippetId);
+
+        if (ps.executeUpdate() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    //delete snippet by snippet id after validating author api key
+    public static Boolean deleteSnippetBySnippetId(String apiKeyAuth, int snippetId) throws SQLException {
+
+        Author author = fetchAuthorByApiKey(apiKeyAuth);
+        Integer authorId = author.getId();
+
+        PreparedStatement ps2 = connection.prepareStatement(deleteSnippet);
+        ps2.setInt(1, snippetId);
+        ps2.setInt(2, authorId);
+        if (ps2.executeUpdate() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static Author fetchAuthorByApiKey(String apikeyAuth) throws SQLException {
+        PreparedStatement ps1 = connection.prepareStatement(readAuthor);
+        ps1.setString(1, apikeyAuth);
+        ResultSet rs1 = ps1.executeQuery();
+        Author author = new Author();
+        while (rs1.next()) {
+            author.setId(rs1.getInt(1));
+            author.setName(rs1.getString(2));
+            author.setEmail(rs1.getString(3));
+            author.setHandle(rs1.getString(4));
+            author.setApiKey(rs1.getString(5));
+        }
+        return author;
     }
 
 }
