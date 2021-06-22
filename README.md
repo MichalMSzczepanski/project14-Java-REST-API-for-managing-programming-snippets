@@ -4,7 +4,7 @@
 
 It would be nice to have one source of snippets instead of 25 bookmarks, 5 spreadsheets and a few apps for managing similliar topics. so here's an API to gather snippets from around the world.
 
-Default user API key required in HTTP header >> "authentication" : 123456789
+
 
 ## Technical aspects
 
@@ -16,7 +16,9 @@ No framework used in the name of practice.
 
 ## API communications
 
-#### JSON example (all fields) 
+Communicating with the API requires an API key in the HTTP header (key: "authentication", value: 123456789)
+
+### JSON example (all fields) 
 
 <pre>{  
 "id":1, // int auto increment,  
