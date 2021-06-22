@@ -19,13 +19,12 @@ public class Author {
         this.apiKey = apiKey;
     }
 
-    public Author(Integer id, String name, String email, String handle, String apiKey, Boolean isAdmin) {
+    public Author(Integer id, String name, String email, String handle, String apiKey) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.handle = handle;
         this.apiKey = apiKey;
-        this.isAdmin = isAdmin;
     }
 
     public Integer getId() {
@@ -68,14 +67,6 @@ public class Author {
         this.apiKey = apiKey;
     }
 
-    public Boolean getIsAdmin() {
-        return isAdmin;
-    }
-
-    public void setIsAdmin(Boolean admin) {
-        isAdmin = admin;
-    }
-
     @Override
     public String toString() {
         return "Author{" +
@@ -84,7 +75,6 @@ public class Author {
                 ", email='" + email + '\'' +
                 ", handle='" + handle + '\'' +
                 ", apiKey='" + apiKey + '\'' +
-                ", isAdmin=" + isAdmin +
                 '}';
     }
 }

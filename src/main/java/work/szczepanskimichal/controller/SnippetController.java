@@ -1,6 +1,7 @@
 package work.szczepanskimichal.controller;
 
 import work.szczepanskimichal.Util.JsonConverter;
+import work.szczepanskimichal.model.Snippet;
 import work.szczepanskimichal.model.SnippetList;
 import work.szczepanskimichal.model.SnippetListDAO;
 
@@ -10,6 +11,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "SnippetCRUD", value = "/snippetAPI")
@@ -26,21 +28,22 @@ public class SnippetController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (request.getHeader("authentication").equals(apiKey)) {
-            if (request.getParameter("id") != null) {
-                // if parameter present - return specific snippet
-                String snippet = jsonConverter.convertObjectToJson(snippetList.getSnippetById(Integer.valueOf(request.getParameter("id"))));
-                response.getWriter().append(snippet);
-            } else {
-                // if parameter not present - return full list of snippets
-                String[] snippetArray = new String[snippetList.getSnippetList().size()];
-                for (int i = 0; i < snippetList.getSnippetList().size(); i++) {
-                    snippetArray[i] = jsonConverter.convertObjectToJson(snippetList.getSnippetList().get(i));
+        try {
+            if (SnippetListDAO.validateApiKeyExistence(request.getHeader("authentication"))) {
+                String apiKey = request.getHeader("authentication");
+                if (request.getParameter("id") != null) {
+                    // if parameter "id" present - return specific snippet by id
+                    int snippetId = Integer.valueOf(request.getParameter("id"));
+                    response.getWriter().append(SnippetListDAO.getSnippetBySnippetId(apiKey, snippetId));
+                } else {
+                    // if parameter not present - return full list of snippets
+                    response.getWriter().append((SnippetListDAO.getAllSnippetsOfAuthor(apiKey).toString()));
                 }
-                response.getWriter().append(Arrays.toString(snippetArray));
+            } else {
+                response.getWriter().append("no api key found or api key doesn't exist");
             }
-        } else {
-            response.getWriter().append("no api key found or api key doesn't exist");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
     }
@@ -49,22 +52,19 @@ public class SnippetController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (request.getHeader("authentication").equals(apiKey)) {
-            String apiKey = request.getHeader("authentication");
-            // tbc details why and how this works --->
-            String newSnippetJsonString = request.getReader().lines().collect(Collectors.joining());
-            // <---
-            try {
-                SnippetListDAO.addSnippet(jsonConverter.convertJsonToSnippet(newSnippetJsonString), apiKey);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-                System.out.println("issue with sql connection");
+        try {
+            if (SnippetListDAO.validateApiKeyExistence(request.getHeader("authentication"))) {
+                // tbc details why and how this works --->
+                String newSnippetJsonString = request.getReader().lines().collect(Collectors.joining());
+                // <---
+                SnippetListDAO.addSnippet(jsonConverter.convertJsonToSnippet(newSnippetJsonString), request.getHeader("authentication"));
+            } else {
+                response.getWriter().append("no api key found or api key doesn't exist");
             }
-            // manual adding to list
-//            snippetList.addSnippet(jsonConverter.convertJsonToSnippet(newSnippetJsonString));
-        } else {
-            response.getWriter().append("no api key found or api key doesn't exist");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
+
     }
 
     // update snippet by id

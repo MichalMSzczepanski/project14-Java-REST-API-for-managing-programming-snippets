@@ -14,18 +14,18 @@ import java.time.Year;
 
 public class JsonConverter <O> {
 
-    private ObjectMapper mapper = new ObjectMapper();
+    private static ObjectMapper mapper = new ObjectMapper();
 
-    public String convertObjectToJson(O o) {
+    public static String convertObjectToJson(Snippet snippet) {
         try {
-            return mapper.writeValueAsString(o);
+            return mapper.writeValueAsString(snippet);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public Snippet convertJsonToSnippet(String string) {
+    public static Snippet convertJsonToSnippet(String string) {
         try {
             return mapper.readValue(string, Snippet.class);
         } catch (IOException e) {
