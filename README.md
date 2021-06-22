@@ -35,30 +35,26 @@ No framework used in the name of practice.
 
 /**GET**
 
-Get all snippets from DB
-"/snippetAPI"
+Get all snippets from DB @ "/snippetAPI"
 requires: API key in HTTP header
 returns array of JSON strings with snippets
 
-Get snippet from DB by ID.
-"/snipeptAPI?id=number"
+Get snippet from DB by ID @"/snipeptAPI?id=number"
 requires: API key in HTTP header; snippet id parameter in URL
 returns JSON string with specific snippet
 
 
 /**POST**
 
-Add snippet to DB.
-"/snippetAPI"
+Add snippet to DB @ "/snippetAPI"
 requires: API key in HTTP header; JSON file in request body
 JSON file fields requered for creating snippet: {"visibility":"normal/ private","author":{"name":"name","email":"email@email.com","handle":"handle","apiKey":"apiKey"},"programmingLanguage":"language","title":"snippet title","snippet":"snippet conntents"}
-returns: nothing
+> returns: nothing
 
 
 /**PUT**
 
-Update snippet in DB
-"/snippetAPI?id=number"
+Update snippet in DB @ "/snippetAPI?id=number"
 requires: API key in HTTP header; parameter in URL; JSON file in request body
 JSON file fields required for updating snippet: {"visibility":"foo","author":{"apiKey":"123456789"},"programmingLanguage"bar","title":"lorem","snippet":"ipsum"}
 returns: nothing
@@ -66,8 +62,7 @@ returns: nothing
 
 /**DELETE**
 
-Delete snippet in DB by snippet id
-"/snippetAPI?id=number"
+Delete snippet in DB by snippet id @ "/snippetAPI?id=number"
 requires: API key in HTTP header; parameter in URL
 returns: nothing
 
