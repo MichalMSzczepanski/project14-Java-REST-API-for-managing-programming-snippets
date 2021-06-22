@@ -4,7 +4,7 @@
 
 It would be nice to have one source of snippets instead of 25 bookmarks, 5 spreadsheets and a few apps for managing similliar topics. so here's an API to gather snippets from around the world.
 
-Api key "authentication" : 123456789
+Default user API key required in HTTP header >> "authentication" : 123456789
 
 ## Technical aspects
 
@@ -16,7 +16,7 @@ No framework used in the name of practice.
 
 ## API communications
 
-**JSON example**
+**JSON example (full)**
 
 {
 "id":1,
@@ -35,37 +35,39 @@ No framework used in the name of practice.
 
 /**GET**
 
-Get all snippets from DB.
+Get all snippets from DB
 "/snippetAPI"
-requires: api key in header
-returns array of JSON files with snippets
+requires: API key in HTTP header
+returns array of JSON strings with snippets
 
 Get snippet from DB by ID.
-"/snipeptAPI?id=1"
-requires: api key in header; parameter in URL
-returns JSON file with specific snippet
+"/snipeptAPI?id=number"
+requires: API key in HTTP header; snippet id parameter in URL
+returns JSON string with specific snippet
 
 
 /**POST**
 
 Add snippet to DB.
 "/snippetAPI"
-requires: api key in header; JSON file in request body
+requires: API key in HTTP header; JSON file in request body
+JSON file fields requered for creating snippet: {"visibility":"normal/ private","author":{"name":"name","email":"email@email.com","handle":"handle","apiKey":"apiKey"},"programmingLanguage":"language","title":"snippet title","snippet":"snippet conntents"}
 returns: nothing
 
 
 /**PUT**
 
-Update snippet in DB by id.
-"/snippetAPI?id=foo"
-requires: api key in header; parameter in URL; JSON file in request body
+Update snippet in DB
+"/snippetAPI?id=number"
+requires: API key in HTTP header; parameter in URL; JSON file in request body
+JSON file fields required for updating snippet: {"visibility":"foo","author":{"apiKey":"123456789"},"programmingLanguage"bar","title":"lorem","snippet":"ipsum"}
 returns: nothing
 
 
 /**DELETE**
 
-Delete snippet in DB by id.
-"/snippetAPI?id=foo"
-requires: api key in header; parameter in URL
+Delete snippet in DB by snippet id
+"/snippetAPI?id=number"
+requires: API key in HTTP header; parameter in URL
 returns: nothing
 
