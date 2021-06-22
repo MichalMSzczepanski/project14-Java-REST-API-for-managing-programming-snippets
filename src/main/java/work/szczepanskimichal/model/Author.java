@@ -6,10 +6,8 @@ public class Author {
     private String email;
     private String handle;
     private String apiKey;
-    private Boolean isAdmin;
 
     public Author() {
-
     }
 
     public Author(String name, String email, String handle, String apiKey) {

@@ -11,6 +11,12 @@ public class DBUtil {
     final static String password = "coderslab";
     final static String URL = "jdbc:mysql://localhost:3306/" + DBname + "?serverTimezone=UTC";
 
+    final static String DBnameX = "u912436210_snippetAPIDB";
+    final static String userX = "u912436210_snippetAPIDB";
+    final static String passwordX = "snippetAPIDB1234";
+    final static String URLX = "jdbc:mysql://sql213.main-hosting.eu/" + DBnameX + "?serverTimezone=UTC";
+
+
     public static Connection getConnection() {
 
         try {
@@ -20,7 +26,8 @@ public class DBUtil {
         }
 
         try {
-            return DriverManager.getConnection(URL, user, password);
+            return DriverManager.getConnection(URLX, userX, passwordX);
+//            return DriverManager.getConnection(URL, user, password);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;

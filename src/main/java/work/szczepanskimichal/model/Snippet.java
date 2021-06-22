@@ -1,9 +1,5 @@
 package work.szczepanskimichal.model;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-
 public class Snippet {
 
     private Integer id;
@@ -16,7 +12,6 @@ public class Snippet {
     public Snippet() {
     }
 
-    // constructor for data base
     public Snippet(String visibility, Author author, String programmingLanguage, String title, String snippet) {
         this.visibility = visibility;
         this.author = author;
@@ -24,16 +19,6 @@ public class Snippet {
         this.title = title;
         this.snippet = snippet;
     }
-
-    // constructor for tests
-//    public Snippet(Integer id, String visibility, Author author, String programmingLanguage, String title, String snippet) {
-//        this.id = id;
-//        this.visibility = visibility;
-//        this.author = author;
-//        this.programmingLanguage = programmingLanguage;
-//        this.title = title;
-//        this.snippet = snippet;
-//    }
 
     public Integer getId() {
         return id;
@@ -82,9 +67,7 @@ public class Snippet {
     public void setSnippet(String snippet) {
         this.snippet = snippet;
     }
-
-
-
+    
     @Override
     public String toString() {
         return "Snippet{" +

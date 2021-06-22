@@ -2,15 +2,10 @@ package work.szczepanskimichal.Util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import work.szczepanskimichal.model.Author;
 import work.szczepanskimichal.model.Snippet;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.Year;
+
 
 public class JsonConverter {
 

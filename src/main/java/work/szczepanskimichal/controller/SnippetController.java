@@ -1,17 +1,11 @@
 package work.szczepanskimichal.controller;
 
 import work.szczepanskimichal.Util.JsonConverter;
-import work.szczepanskimichal.model.Snippet;
-import work.szczepanskimichal.model.SnippetList;
 import work.szczepanskimichal.model.SnippetListDAO;
-
-import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "SnippetCRUD", value = "/snippetAPI")
@@ -19,7 +13,7 @@ public class SnippetController extends HttpServlet {
 
     // get all snippets or snippet by id
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String apiKey = request.getHeader("authentication");
         try {
             if (SnippetListDAO.validateApiKeyExistence(apiKey)) {
@@ -42,7 +36,7 @@ public class SnippetController extends HttpServlet {
 
     // post snippet
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         try {
             if (SnippetListDAO.validateApiKeyExistence(request.getHeader("authentication"))) {
@@ -60,7 +54,7 @@ public class SnippetController extends HttpServlet {
     }
 
     // update snippet by id
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String apiKey = request.getHeader("authentication");
         try {
             if (SnippetListDAO.validateApiKeyExistence(apiKey)) {
@@ -75,7 +69,7 @@ public class SnippetController extends HttpServlet {
     }
 
     // delete snippet by id
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String apiKey = request.getHeader("authentication");
         try {
             if (SnippetListDAO.validateApiKeyExistence(apiKey)) {
