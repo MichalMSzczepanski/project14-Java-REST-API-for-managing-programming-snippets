@@ -4,8 +4,6 @@
 
 It would be nice to have one source of snippets instead of 25 bookmarks, 5 spreadsheets and a few apps for managing similliar topics. so here's an API to gather snippets from around the world.
 
-REST API available at: https://programming-snippet-rest-api.herokuapp.com/snippetAPI
-
 ## Technical aspects
 
 - Java 8 (javax.servlet-api; jackson-databind; mysql-connector-java)
@@ -17,6 +15,8 @@ No framework used in the name of practice.
 ## API communications
 
 Communicating with the API requires an API key in the HTTP header (key: "authentication", value: 123456789)
+
+REST API available at: https://programming-snippet-rest-api.herokuapp.com/snippetAPI
 
 ### JSON example (all fields) 
 
@@ -39,13 +39,13 @@ Communicating with the API requires an API key in the HTTP header (key: "authent
 
 ### 1. GET
 
-1.1 Get all snippets from DB @ "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snippetAPI"  
+1.1 Get all snippets from DB at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snippetAPI"  
 **requires:** 
 * API key in HTTP header  
 
 **returns:** array of JSON strings with snippets  
 
-1.2 Get snippet from DB by ID @"https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snipeptAPI?id=number"  
+1.2 Get snippet from DB by ID at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snipeptAPI?id=number"  
 **requires:** 
 * API key in HTTP header; 
 * snippet id parameter in URL  
@@ -56,7 +56,7 @@ Communicating with the API requires an API key in the HTTP header (key: "authent
 
 ### 2. POST
 
-2.1 Add snippet to DB @ "/snippetAPI"  
+2.1 Add snippet to DB at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snippetAPI"  
 **requires:** 
 * API key in HTTP header; 
 * JSON file in request body  
@@ -80,7 +80,7 @@ Communicating with the API requires an API key in the HTTP header (key: "authent
 
 ### PUT
 
-Update snippet in DB @ "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snippetAPI?id=number"  
+Update snippet in DB at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snippetAPI?id=number"  
 **requires:** 
 * API key in HTTP header; 
 * parameter in URL; 
@@ -103,7 +103,7 @@ Update snippet in DB @ "https://programming-snippet-rest-api.herokuapp.com/snipp
 
 ### DELETE
 
-Delete snippet in DB by snippet id @ "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snippetAPI?id=number"  
+Delete snippet in DB by snippet id at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snippetAPI?id=number"  
 **requires:** 
 * API key in HTTP header; 
 * parameter in URL 
