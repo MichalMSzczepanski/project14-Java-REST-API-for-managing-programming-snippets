@@ -16,54 +16,90 @@ No framework used in the name of practice.
 
 ## API communications
 
-**JSON example (full)**
+#### JSON example (all fields) 
 
+<pre>{  
+"id":1, // int auto increment,  
+"visibility":"private",  // varchar(255)
+"author": {  
+    "id":1,  // varchar(255)
+    "name":"authorName",  // varchar(255)
+    "email":"authorEmail@email.com", // varchar(255)
+    "handle":"authorHandle"}, // varchar(255)
+    "apiKey":"apiKey"}, // varchar(255)
+    },  
+"programmingLanguage":"programmingLanguage", //varchar(255)
+"title":"snippetTitle" //varchar(255)  
+"snippet":"snippetContent" // varchar(2000) 
+}</pre>
+
+
+### 1. GET
+
+1.1 Get all snippets from DB @ "/snippetAPI"  
+**requires:** 
+* API key in HTTP header  
+
+**returns:** array of JSON strings with snippets  
+
+1.2 Get snippet from DB by ID @"/snipeptAPI?id=number"  
+**requires:** 
+* API key in HTTP header; 
+* snippet id parameter in URL  
+
+**returns:** JSON string with specific snippet  
+
+
+### 2. POST
+
+2.1 Add snippet to DB @ "/snippetAPI"  
+**requires:** 
+* API key in HTTP header; 
+* JSON file in request body  
+
+**JSON file fields requered for creating snippet:**  
+<pre>
 {
-"id":1,
-"visibility":"private",
+"visibility":"normal",
 "author": {
-    "id":1,
-    "name":"name1",
-    "email":"email1@email.com",
-    "admin":false
-    },
-"programmingLanguage":"java",
-"title":"java spring - first snippet",
-"snippet":"first snippet contents"
-}
+    "name":"name",
+    "email":"email@email.com",
+    "handle":"handle",
+    "apiKey":"apiKey"},
+"programmingLanguage":"language",
+"title":"snippet title",
+"snippet":"snippet conntents"
+}</pre> 
+**returns:** nothing  
 
 
-/**GET**
+### PUT
 
-Get all snippets from DB @ "/snippetAPI"
-requires: API key in HTTP header
-returns array of JSON strings with snippets
+Update snippet in DB @ "/snippetAPI?id=number"  
+**requires:** 
+* API key in HTTP header; 
+* parameter in URL; 
+* JSON file in request body  
 
-Get snippet from DB by ID @"/snipeptAPI?id=number"
-requires: API key in HTTP header; snippet id parameter in URL
-returns JSON string with specific snippet
+**JSON file fields required for updating snippet:**  
+<pre>
+{
+"visibility":"foo",
+"author":{
+    "apiKey":"123456789"},
+"programmingLanguage"bar",
+"title":"lorem",
+"snippet":"ipsum"
+}</pre>
 
-
-/**POST**
-
-Add snippet to DB @ "/snippetAPI"
-requires: API key in HTTP header; JSON file in request body
-JSON file fields requered for creating snippet:
-{"visibility":"normal/ private","author":{"name":"name","email":"email@email.com","handle":"handle","apiKey":"apiKey"},"programmingLanguage":"language","title":"snippet title","snippet":"snippet conntents"}
-returns: nothing
-
-
-/**PUT**
-
-Update snippet in DB @ "/snippetAPI?id=number"
-requires: API key in HTTP header; parameter in URL; JSON file in request body
-JSON file fields required for updating snippet: {"visibility":"foo","author":{"apiKey":"123456789"},"programmingLanguage"bar","title":"lorem","snippet":"ipsum"}
-returns: nothing
+**returns:** nothing
 
 
-/**DELETE**
+### DELETE
 
-Delete snippet in DB by snippet id @ "/snippetAPI?id=number"
-requires: API key in HTTP header; parameter in URL
-returns: nothing
+Delete snippet in DB by snippet id @ "/snippetAPI?id=number"  
+**requires:** 
+* API key in HTTP header; 
+* parameter in URL  
+**returns:** nothing
 
