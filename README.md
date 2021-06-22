@@ -33,6 +33,7 @@ No framework used in the name of practice.
 "snippet":"snippetContent" // varchar(2000) 
 }</pre>
 
+<br><hr><br>
 
 ### 1. GET
 
@@ -49,6 +50,7 @@ No framework used in the name of practice.
 
 **returns:** JSON string with specific snippet  
 
+<br><hr><br>
 
 ### 2. POST
 
@@ -72,6 +74,7 @@ No framework used in the name of practice.
 }</pre> 
 **returns:** nothing  
 
+<br><hr><br>
 
 ### PUT
 
@@ -94,6 +97,7 @@ Update snippet in DB @ "/snippetAPI?id=number"
 
 **returns:** nothing
 
+<br><hr><br>
 
 ### DELETE
 
