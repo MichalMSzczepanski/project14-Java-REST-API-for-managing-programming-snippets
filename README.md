@@ -16,6 +16,8 @@ No framework used in the name of practice.
 
 Communicating with the API requires an API key in the HTTP header (key: "authentication", value: 123456789)
 
+_If you want to get your own API key, please let me know at michal.m.szczepanski@gmail.com_
+
 REST API available at: https://programming-snippet-rest-api.herokuapp.com/snippetAPI
 
 ### JSON example (all fields) 
