@@ -80,7 +80,7 @@ REST API available at: https://programming-snippet-rest-api.herokuapp.com/snippe
 
 <br><hr><br>
 
-### PUT
+### 3. PUT
 
 Update snippet in DB at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snippetAPI?id=number"  
 **requires:** 
@@ -103,7 +103,7 @@ Update snippet in DB at "https://programming-snippet-rest-api.herokuapp.com/snip
 
 <br><hr><br>
 
-### DELETE
+### 4. DELETE
 
 Delete snippet in DB by snippet id at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snippetAPI?id=number"  
 **requires:** 
