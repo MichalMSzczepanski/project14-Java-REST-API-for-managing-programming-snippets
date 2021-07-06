@@ -41,13 +41,13 @@ REST API available at: https://programming-snippet-rest-api.herokuapp.com/snippe
 
 ### 1. GET
 
-1.1 Get all snippets from DB at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snippetAPI"  
+1.1 Get all snippets from DB at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI"  
 **requires:** 
 * API key in HTTP header  
 
 **returns:** array of JSON strings with snippets  
 
-1.2 Get snippet from DB by ID at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snipeptAPI?id=number"  
+1.2 Get snippet from DB by ID at "https://programming-snippet-rest-api.herokuapp.com/snipeptAPI?id=number"  
 **requires:** 
 * API key in HTTP header; 
 * snippet id parameter in URL  
@@ -58,7 +58,7 @@ REST API available at: https://programming-snippet-rest-api.herokuapp.com/snippe
 
 ### 2. POST
 
-2.1 Add snippet to DB at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snippetAPI"  
+2.1 Add snippet to DB at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI"  
 **requires:** 
 * API key in HTTP header; 
 * JSON file in request body  
@@ -82,7 +82,7 @@ REST API available at: https://programming-snippet-rest-api.herokuapp.com/snippe
 
 ### 3. PUT
 
-Update snippet in DB at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snippetAPI?id=number"  
+Update snippet in DB at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI?id=number"  
 **requires:** 
 * API key in HTTP header; 
 * parameter in URL; 
@@ -105,7 +105,7 @@ Update snippet in DB at "https://programming-snippet-rest-api.herokuapp.com/snip
 
 ### 4. DELETE
 
-Delete snippet in DB by snippet id at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI/snippetAPI?id=number"  
+Delete snippet in DB by snippet id at "https://programming-snippet-rest-api.herokuapp.com/snippetAPI?id=number"  
 **requires:** 
 * API key in HTTP header; 
 * parameter in URL 
